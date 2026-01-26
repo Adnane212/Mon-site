@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="google-site-verification" content="OOrtn4Bly2tzc8FSbhtpRYfquUQY2ONSsVY9H6uk1to" />
-  <title>Your Brand – Build Connect Innovate</title>
+
+  <!-- STEP 1: Change this title to your company name -->
+  <title>YOUR COMPANY NAME – Build Connect Innovate</title>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
@@ -366,22 +369,25 @@
       justify-content: space-between;
     }
 
+    /* TOP NAV BRAND AS LOGO IMAGE */
     .nav-brand {
-      font-weight: 700;
-      color: #e5e7eb;
+      display: flex;
+      align-items: center;
       text-decoration: none;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-size: 0.95rem;
-      background: linear-gradient(135deg, #ffffff, var(--blue-bright));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      transition: opacity 0.3s ease;
     }
 
-    .nav-brand:hover {
-      opacity: 0.8;
+    .nav-logo {
+      height: 36px; /* change this number to make nav logo bigger/smaller */
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 0 8px rgba(0, 8, 113, 0.5));
+      transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-brand:hover .nav-logo {
+      transform: translateY(-1px) scale(1.03);
+      filter: drop-shadow(0 0 14px rgba(92, 110, 239, 0.8));
+      opacity: 0.95;
     }
 
     .nav-links {
@@ -450,10 +456,11 @@
       padding: 3rem 1.5rem 2.5rem;
     }
 
+    /* BIGGER HERO LOGO */
     .logo-wrapper {
       position: relative;
-      width: 280px;
-      max-width: 70vw;
+      width: 360px;      /* was 280px – hero logo is bigger now */
+      max-width: 80vw;
       aspect-ratio: 1 / 1;
       display: flex;
       align-items: center;
@@ -750,7 +757,7 @@
 
     @media (max-width: 480px) {
       .logo-wrapper {
-        width: 220px;
+        width: 280px; /* was 220px – bigger on phones too */
       }
 
       .contact-wrapper h2 {
@@ -804,7 +811,14 @@
 
   <header>
     <nav class="nav">
-      <a href="#home" class="nav-brand">Your Brand</a>
+      <!-- STEP 2: TOP NAV LOGO
+           - Put your logo file in the same folder as this index.html
+           - Name it: logo-white.png (or change the src below to your file name)
+      -->
+      <a href="#home" class="nav-brand">
+        <img src="logo-white.png" alt="YOUR COMPANY NAME" class="nav-logo" />
+      </a>
+
       <div class="nav-links">
         <a href="#home" class="nav-link">Home</a>
         <a href="#contact" class="nav-link">Contact</a>
@@ -814,10 +828,16 @@
 
   <main>
     <section id="home" class="hero">
+      <!-- STEP 3: HERO LOGO
+           - If you have two versions (light + blue), use two different files.
+           - If you only have ONE logo, you can use the same file in both src attributes.
+      -->
       <div class="logo-wrapper" title="Hover to see the blue logo">
-        <img src="logo-white.png" alt="Your Brand Logo - White" class="logo logo-white" />
-        <img src="logo-blue.png" alt="Your Brand Logo - Blue" class="logo logo-blue" />
+        <img src="logo-white.png" alt="YOUR COMPANY NAME Logo - Light" class="logo logo-white" />
+        <img src="logo-blue.png"  alt="YOUR COMPANY NAME Logo - Color" class="logo logo-blue" />
       </div>
+
+      <!-- You can change this tagline text if you want -->
       <p class="tagline">Build Connect Innovate</p>
     </section>
 
