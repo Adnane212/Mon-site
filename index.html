@@ -849,6 +849,11 @@
         </p>
 
         <form class="contact-form" action="https://formsubmit.co/contact@mazoo.xyz" method="POST">
+          <!-- turn off FormSubmit's captcha -->
+  <input type="hidden" name="_captcha" value="false">
+
+  <!-- optional but recommended: basic spam trap -->
+  <input type="text" name="_honey" style="display:none">
           <div class="form-row">
             <label for="name">Name</label>
             <input id="name" name="name" type="text" placeholder="Your name" required />
