@@ -1,2706 +1,859 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="google-site-verification" content="OOrtn4Bly2tzc8FSbhtpRYfquUQY2ONSsVY9H6uk1to" />
-  <title>Mazoo – Tour de contrôle carburant & maintenance multi-sites</title>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="apple-touch-icon" href="favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Mazoo aide les entreprises BTP, Transport & Industrie à reprendre le contrôle sur le carburant et la maintenance de leurs flottes multi-sites grâce à une plateforme unifiée simple et robuste." />
-  <meta name="theme-color" content="#020317" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Your Brand – Build Connect Innovate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <style>
-    :root {
-      --bg-main: #020317;
-      --bg-alt: #040521;
-      --bg-card: rgba(5, 9, 40, 0.96);
-      --primary: #000871;
-      --primary-soft: #0013c0;
-      --accent: #00e0ff;
-      --accent-soft: rgba(0, 224, 255, 0.15);
-      --text-main: #f5f7ff;
-      --text-muted: #a4acc5;
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --danger: #ff4b64;
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
-      --radius-lg: 18px;
-      --radius-md: 12px;
-      --radius-pill: 999px;
-      --transition-fast: 0.2s ease-out;
-      --transition-med: 0.45s cubic-bezier(0.16, 0.84, 0.44, 1);
-      --nav-height: 72px;
-    }
-
-    * {
+    /* Reset */
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
-    }
-
-    html,
-    body {
       margin: 0;
       padding: 0;
-      scroll-behavior: smooth;
-      background: radial-gradient(circle at top left, #00156e 0, #020317 40%, #000000 100%);
-      color: var(--text-main);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    :root {
+      color-scheme: dark;
+      /* Primary deep blue palette based on #000871 */
+      --blue-deep: #000871;
+      --blue-primary: #0010a3;
+      --blue-medium: #1a2cb8;
+      --blue-light: #3d4fd4;
+      --blue-bright: #5c6eef;
+      --blue-glow: rgba(0, 8, 113, 0.7);
+      --blue-glow-light: rgba(60, 79, 212, 0.5);
+      
+      /* Accent colors */
+      --indigo-glow: rgba(79, 70, 229, 0.4);
+      --violet-glow: rgba(109, 40, 217, 0.3);
+      --cyan-accent: #06b6d4;
+      --cyan-glow: rgba(6, 182, 212, 0.25);
+      
+      /* Background */
+      --bg-dark: #000309;
+      --bg-card: rgba(0, 3, 20, 0.9);
     }
 
     body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #ffffff;
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: -200px;
-      background-image:
-        linear-gradient(120deg, rgba(0, 224, 255, 0.06) 1px, transparent 1px),
-        linear-gradient(-60deg, rgba(0, 8, 113, 0.18) 1px, transparent 1px);
-      background-size: 140px 140px, 220px 220px;
-      opacity: 0.35;
-      mix-blend-mode: soft-light;
-      pointer-events: none;
-      z-index: -2;
-    }
-
-    body::after {
-      content: "";
+    /* ===== ENHANCED BACKGROUND SYSTEM ===== */
+    
+    /* Base gradient background */
+    .bg-base {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at 10% 0%, rgba(0, 224, 255, 0.09), transparent 55%),
-        radial-gradient(circle at 90% 100%, rgba(0, 8, 113, 0.7), transparent 55%);
-      mix-blend-mode: screen;
-      pointer-events: none;
-      z-index: -1;
+      z-index: -10;
+      background: 
+        /* Deep space base with deep blue tones */
+        radial-gradient(ellipse 120% 80% at 50% 0%, rgba(0, 8, 113, 0.4) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 50% at 100% 100%, rgba(0, 16, 163, 0.35) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 0% 80%, rgba(26, 44, 184, 0.3) 0%, transparent 50%),
+        linear-gradient(180deg, var(--bg-dark) 0%, #000520 50%, var(--bg-dark) 100%);
     }
 
-    .page-shell {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 20px 80px;
+    /* Animated nebula layers */
+    .nebula-layer {
+      position: fixed;
+      inset: 0;
+      z-index: -9;
+      opacity: 0.7;
+      background: 
+        radial-gradient(circle 800px at 20% 20%, rgba(0, 8, 113, 0.4), transparent 70%),
+        radial-gradient(circle 600px at 80% 30%, rgba(79, 70, 229, 0.25), transparent 60%),
+        radial-gradient(circle 900px at 60% 80%, rgba(0, 16, 163, 0.35), transparent 70%),
+        radial-gradient(circle 500px at 10% 90%, rgba(6, 182, 212, 0.15), transparent 50%);
+      animation: nebula-drift 30s ease-in-out infinite alternate;
     }
 
-    @media (min-width: 1280px) {
-      .page-shell {
-        max-width: 1200px;
-      }
+    .nebula-layer-2 {
+      position: fixed;
+      inset: 0;
+      z-index: -8;
+      opacity: 0.5;
+      background: 
+        radial-gradient(circle 700px at 70% 10%, rgba(26, 44, 184, 0.3), transparent 60%),
+        radial-gradient(circle 500px at 30% 70%, rgba(0, 8, 113, 0.35), transparent 50%),
+        radial-gradient(circle 600px at 90% 60%, rgba(109, 40, 217, 0.2), transparent 55%);
+      animation: nebula-drift-2 40s ease-in-out infinite alternate-reverse;
     }
 
-    /* Top nav */
-    .top-nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(14px);
-      background: linear-gradient(to right, rgba(2, 3, 23, 0.96), rgba(2, 3, 23, 0.85));
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    @keyframes nebula-drift {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-30px, 20px) scale(1.05); }
+      100% { transform: translate(20px, -30px) scale(0.98); }
     }
 
-    .top-nav-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      min-height: var(--nav-height);
+    @keyframes nebula-drift-2 {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(40px, -20px) rotate(2deg); }
     }
 
-    .brand-block {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    /* Star field layer 1 - Small distant stars */
+    .stars-small {
+      position: fixed;
+      inset: 0;
+      z-index: -7;
+      background-image: 
+        radial-gradient(1px 1px at 10% 10%, rgba(255, 255, 255, 0.9), transparent),
+        radial-gradient(1px 1px at 20% 30%, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(1px 1px at 35% 15%, rgba(255, 255, 255, 0.7), transparent),
+        radial-gradient(1px 1px at 45% 45%, rgba(255, 255, 255, 0.85), transparent),
+        radial-gradient(1px 1px at 55% 25%, rgba(255, 255, 255, 0.75), transparent),
+        radial-gradient(1px 1px at 70% 55%, rgba(255, 255, 255, 0.9), transparent),
+        radial-gradient(1px 1px at 80% 35%, rgba(255, 255, 255, 0.65), transparent),
+        radial-gradient(1px 1px at 90% 70%, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(1px 1px at 15% 60%, rgba(255, 255, 255, 0.7), transparent),
+        radial-gradient(1px 1px at 25% 80%, rgba(255, 255, 255, 0.85), transparent),
+        radial-gradient(1px 1px at 40% 70%, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(1px 1px at 60% 90%, rgba(255, 255, 255, 0.75), transparent),
+        radial-gradient(1px 1px at 75% 85%, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(1px 1px at 85% 20%, rgba(255, 255, 255, 0.7), transparent),
+        radial-gradient(1px 1px at 95% 50%, rgba(255, 255, 255, 0.65), transparent);
+      background-size: 250px 250px;
+      animation: stars-twinkle 8s ease-in-out infinite, stars-move 120s linear infinite;
     }
 
-    .brand-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 14px;
-      border: 1px solid rgba(0, 224, 255, 0.5);
-      background:
-        radial-gradient(circle at 10% 10%, rgba(0, 224, 255, 0.4), transparent 55%),
-        radial-gradient(circle at 80% 80%, rgba(0, 8, 113, 0.9), transparent 60%),
-        #050829;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6);
+    /* Star field layer 2 - Medium stars with blue tint */
+    .stars-medium {
+      position: fixed;
+      inset: 0;
+      z-index: -6;
+      background-image: 
+        radial-gradient(1.5px 1.5px at 5% 25%, rgba(147, 155, 255, 1), transparent),
+        radial-gradient(1.5px 1.5px at 18% 55%, rgba(167, 139, 250, 0.9), transparent),
+        radial-gradient(1.5px 1.5px at 32% 40%, rgba(129, 140, 248, 0.85), transparent),
+        radial-gradient(1.5px 1.5px at 48% 75%, rgba(147, 155, 255, 0.9), transparent),
+        radial-gradient(1.5px 1.5px at 62% 15%, rgba(165, 180, 252, 0.95), transparent),
+        radial-gradient(1.5px 1.5px at 78% 65%, rgba(6, 182, 212, 0.7), transparent),
+        radial-gradient(1.5px 1.5px at 88% 45%, rgba(167, 139, 250, 0.9), transparent),
+        radial-gradient(1.5px 1.5px at 95% 85%, rgba(147, 155, 255, 0.8), transparent);
+      background-size: 350px 350px;
+      animation: stars-twinkle-2 12s ease-in-out infinite, stars-move-2 180s linear infinite;
+    }
+
+    /* Star field layer 3 - Large bright stars */
+    .stars-large {
+      position: fixed;
+      inset: 0;
+      z-index: -5;
+      background-image: 
+        radial-gradient(2px 2px at 12% 18%, #ffffff, transparent),
+        radial-gradient(2.5px 2.5px at 38% 62%, rgba(92, 110, 239, 1), transparent),
+        radial-gradient(2px 2px at 65% 28%, #ffffff, transparent),
+        radial-gradient(3px 3px at 82% 78%, rgba(109, 40, 217, 0.9), transparent),
+        radial-gradient(2px 2px at 28% 88%, rgba(6, 182, 212, 0.95), transparent);
+      background-size: 500px 500px;
+      animation: stars-twinkle-3 6s ease-in-out infinite;
+    }
+
+    @keyframes stars-twinkle {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes stars-twinkle-2 {
+      0%, 100% { opacity: 0.5; }
+      33% { opacity: 0.8; }
+      66% { opacity: 0.6; }
+    }
+
+    @keyframes stars-twinkle-3 {
+      0%, 100% { opacity: 0.8; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    @keyframes stars-move {
+      from { transform: translate(0, 0); }
+      to { transform: translate(-100px, -50px); }
+    }
+
+    @keyframes stars-move-2 {
+      from { transform: translate(0, 0); }
+      to { transform: translate(80px, -80px); }
+    }
+
+    /* Shooting stars */
+    .shooting-stars {
+      position: fixed;
+      inset: 0;
+      z-index: -4;
       overflow: hidden;
     }
 
-    .brand-logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
+    .shooting-star {
+      position: absolute;
+      width: 100px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(92, 110, 239, 0.6), transparent);
+      opacity: 0;
+      transform: rotate(-45deg);
+      animation: shoot 8s ease-in-out infinite;
     }
 
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
+    .shooting-star:nth-child(1) {
+      top: 10%;
+      left: 20%;
+      animation-delay: 0s;
     }
 
-    .brand-name {
-      font-weight: 650;
-      letter-spacing: 0.06em;
-      font-size: 0.9rem;
-      text-transform: uppercase;
+    .shooting-star:nth-child(2) {
+      top: 30%;
+      left: 70%;
+      animation-delay: 3s;
+      width: 80px;
     }
 
-    .brand-tagline {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+    .shooting-star:nth-child(3) {
+      top: 50%;
+      left: 40%;
+      animation-delay: 6s;
+      width: 120px;
     }
 
-    .nav-main {
+    .shooting-star:nth-child(4) {
+      top: 20%;
+      left: 85%;
+      animation-delay: 4.5s;
+      width: 60px;
+    }
+
+    .shooting-star:nth-child(5) {
+      top: 70%;
+      left: 15%;
+      animation-delay: 7s;
+      width: 90px;
+    }
+
+    @keyframes shoot {
+      0% {
+        opacity: 0;
+        transform: rotate(-45deg) translateX(0);
+      }
+      2% {
+        opacity: 1;
+      }
+      10% {
+        opacity: 0;
+        transform: rotate(-45deg) translateX(300px);
+      }
+      100% {
+        opacity: 0;
+        transform: rotate(-45deg) translateX(300px);
+      }
+    }
+
+    /* Ambient glow orbs */
+    .glow-orbs {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+    }
+
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.4;
+      animation: orb-pulse 10s ease-in-out infinite;
+    }
+
+    .glow-orb:nth-child(1) {
+      width: 400px;
+      height: 400px;
+      background: var(--blue-glow);
+      top: -100px;
+      left: -100px;
+      animation-delay: 0s;
+    }
+
+    .glow-orb:nth-child(2) {
+      width: 300px;
+      height: 300px;
+      background: var(--indigo-glow);
+      top: 40%;
+      right: -80px;
+      animation-delay: 3s;
+    }
+
+    .glow-orb:nth-child(3) {
+      width: 350px;
+      height: 350px;
+      background: var(--cyan-glow);
+      bottom: -100px;
+      left: 30%;
+      animation-delay: 6s;
+    }
+
+    .glow-orb:nth-child(4) {
+      width: 250px;
+      height: 250px;
+      background: var(--blue-glow-light);
+      top: 60%;
+      left: -50px;
+      animation-delay: 4s;
+    }
+
+    @keyframes orb-pulse {
+      0%, 100% { 
+        opacity: 0.3; 
+        transform: scale(1); 
+      }
+      50% { 
+        opacity: 0.5; 
+        transform: scale(1.15); 
+      }
+    }
+
+    /* Subtle grid overlay */
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background-image: 
+        linear-gradient(rgba(0, 8, 113, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 8, 113, 0.05) 1px, transparent 1px);
+      background-size: 100px 100px;
+      animation: grid-fade 20s ease-in-out infinite;
+    }
+
+    @keyframes grid-fade {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 0.8; }
+    }
+
+    /* Vignette effect */
+    .vignette {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 3, 9, 0.8) 100%);
+      pointer-events: none;
+    }
+
+    /* ===== END BACKGROUND SYSTEM ===== */
+
+    /* Header / navigation */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      background: linear-gradient(180deg, rgba(0, 3, 20, 0.98) 0%, rgba(0, 8, 113, 0.3) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(92, 110, 239, 0.2);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
       display: flex;
       align-items: center;
-      gap: 18px;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      font-weight: 700;
+      color: #e5e7eb;
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+      background: linear-gradient(135deg, #ffffff, var(--blue-bright));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-brand:hover {
+      opacity: 0.8;
     }
 
     .nav-links {
       display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 6px 12px;
-      border-radius: var(--radius-pill);
-      background: radial-gradient(circle at 0 0, rgba(0, 224, 255, 0.14), transparent 60%);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .nav-links-ar {
-      display: none;
-    }
-
-    body.lang-ar .nav-links-fr {
-      display: none;
-    }
-
-    body.lang-ar .nav-links-ar {
-      display: flex;
+      gap: 0.5rem;
     }
 
     .nav-link {
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      font-size: 0.8rem;
-      padding: 6px 10px;
+      color: #a5b4fc;
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 0.4rem 1rem;
       border-radius: 999px;
-      cursor: pointer;
+      border: 1px solid transparent;
       position: relative;
-      transition: color var(--transition-fast), background-color var(--transition-fast);
-      white-space: nowrap;
+      overflow: hidden;
+      transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.2s ease;
     }
 
-    .nav-link::after {
-      content: "";
+    .nav-link::before {
+      content: '';
       position: absolute;
       inset: 0;
-      border-radius: inherit;
-      border: 1px solid transparent;
-      background-image: linear-gradient(120deg, rgba(0, 224, 255, 0.9), rgba(0, 8, 113, 0.9));
+      background: linear-gradient(135deg, rgba(0, 8, 113, 0.4), rgba(92, 110, 239, 0.2));
       opacity: 0;
-      transition: opacity var(--transition-fast);
-      z-index: -1;
+      transition: opacity 0.3s ease;
+      border-radius: inherit;
     }
 
     .nav-link:hover {
       color: #ffffff;
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .nav-link.nav-link--primary {
-      color: #ffffff;
-      font-weight: 600;
-      padding-inline: 14px;
-      background: radial-gradient(circle at 0 0, rgba(0, 224, 255, 0.2), rgba(0, 8, 113, 0.85));
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
-    }
-
-    .nav-link.nav-link--primary::after {
-      opacity: 0.7;
-    }
-
-    .language-switch {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      padding: 3px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-    }
-
-    .lang-toggle {
-      border-radius: 999px;
-      border: none;
-      padding: 4px 10px;
-      font-size: 0.76rem;
-      cursor: pointer;
-      background: transparent;
-      color: var(--text-muted);
-      transition: background-color var(--transition-fast), color var(--transition-fast);
-    }
-
-    .lang-toggle.active {
-      background: linear-gradient(120deg, var(--accent), var(--primary));
-      color: #020317;
-      font-weight: 600;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8);
-    }
-
-    @media (max-width: 768px) {
-      .nav-links-fr,
-      .nav-links-ar {
-        display: none;
-      }
-
-      .top-nav-inner {
-        padding-inline: 16px;
-      }
-    }
-
-    /* Focus visible pour l’accessibilité */
-    .btn:focus-visible,
-    .nav-link:focus-visible,
-    .lang-toggle:focus-visible,
-    .scroll-top:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
-
-    /* Layout for languages */
-    .lang-section {
-      display: none;
-      padding-top: 28px;
-    }
-
-    body.lang-fr .lang-section.lang-fr {
-      display: block;
-    }
-
-    body.lang-ar .lang-section.lang-ar {
-      display: block;
-    }
-
-    .lang-ar {
-      direction: rtl;
-      text-align: right;
-    }
-
-    /* Hero */
-    .hero {
-      padding-top: 32px;
-      padding-bottom: 56px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.1fr);
-      gap: 34px;
-      align-items: center;
-    }
-
-    .hero-badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .hero-badge {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(0, 224, 255, 0.6);
-      background: radial-gradient(circle at 0 0, rgba(0, 224, 255, 0.2), transparent 55%);
-      color: var(--text-main);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .hero-badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 14px rgba(0, 224, 255, 0.7);
-    }
-
-    .hero-subtag {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .hero-title {
-      font-size: clamp(2rem, 3vw, 2.6rem);
-      line-height: 1.12;
-      font-weight: 730;
-      letter-spacing: -0.03em;
-      margin: 4px 0 12px;
-    }
-
-    .hero-title span.highlight {
-      background: linear-gradient(120deg, #00e0ff, #5cffc6);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-lead {
-      font-size: 0.98rem;
-      color: var(--text-muted);
-      max-width: 34rem;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .hero-lead strong {
-      color: #e5e9ff;
-      font-weight: 600;
-    }
-
-    .hero-micro {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      margin-bottom: 14px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .hero-micro::before {
-      content: "";
-      width: 32px;
-      height: 1px;
-      background: linear-gradient(90deg, rgba(0, 224, 255, 0.8), transparent);
-    }
-
-    .hero-cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .btn {
-      border-radius: var(--radius-pill);
-      border: none;
-      padding: 11px 18px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
-      position: relative;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--primary-soft));
-      color: #020317;
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
-    }
-
-    .btn-primary::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.22), transparent 60%);
-      opacity: 0;
-      transition: opacity var(--transition-fast);
-    }
-
-    .btn-primary:hover {
+      border-color: rgba(92, 110, 239, 0.6);
+      box-shadow: 
+        0 0 20px rgba(0, 8, 113, 0.5),
+        inset 0 0 20px rgba(92, 110, 239, 0.1);
       transform: translateY(-1px);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
     }
 
-    .btn-primary:hover::after {
+    .nav-link:hover::before {
       opacity: 1;
     }
 
-    .btn-secondary {
-      border: 1px solid rgba(0, 224, 255, 0.5);
-      background: rgba(3, 6, 30, 0.9);
-      color: var(--text-main);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(8, 13, 55, 0.98);
-      transform: translateY(-1px);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8);
-    }
-
-    .btn-icon {
-      font-size: 1rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero-footnote {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    .hero-footnote span {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    .hero-metrics {
-      margin-top: 18px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .hero-metric {
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(0, 224, 255, 0.45);
-      background: rgba(2, 5, 30, 0.9);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.78rem;
-    }
-
-    .hero-metric-label {
-      color: var(--text-muted);
-    }
-
-    .hero-metric-value {
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    /* Hero visual (right) */
-    .hero-visual {
+    main {
+      padding-top: 4rem;
       position: relative;
-      min-height: 260px;
-      border-radius: 28px;
-      padding: 16px;
-      background:
-        radial-gradient(circle at 0 0, rgba(0, 224, 255, 0.24), transparent 60%),
-        radial-gradient(circle at 100% 100%, rgba(0, 8, 113, 0.9), transparent 60%),
-        linear-gradient(140deg, #050822, #000212);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: var(--shadow-soft);
-      overflow: hidden;
-      isolation: isolate;
-    }
-
-    .hero-visual::before {
-      content: "";
-      position: absolute;
-      inset: -1px;
-      background-image: linear-gradient(120deg, rgba(0, 224, 255, 0.18), transparent 40%, rgba(0, 224, 255, 0.12));
-      mix-blend-mode: soft-light;
-      opacity: 0.8;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .hero-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 24px 24px;
-      opacity: 0.4;
-      pointer-events: none;
-      mask-image: radial-gradient(circle at 10% 0%, black, transparent 65%);
-    }
-
-    .hero-orbit {
-      position: absolute;
-      inset: 14px;
-      border-radius: 24px;
-      border: 1px dashed rgba(0, 224, 255, 0.36);
-      opacity: 0.5;
-      animation: orbitPulse 10s linear infinite;
-      pointer-events: none;
-    }
-
-    .hero-orbit::before,
-    .hero-orbit::after {
-      content: "";
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 18px rgba(0, 224, 255, 0.8);
-    }
-
-    .hero-orbit::before {
-      top: 12%;
-      left: 10%;
-    }
-
-    .hero-orbit::after {
-      bottom: 8%;
-      right: 16%;
-    }
-
-    .hero-dashboard {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
       z-index: 1;
     }
 
-    .dash-row {
-      display: grid;
-      grid-template-columns: 1.15fr 0.9fr;
-      gap: 12px;
+    section {
+      scroll-margin-top: 4.5rem;
     }
 
-    .dash-card {
-      background: linear-gradient(145deg, rgba(2, 6, 34, 0.98), rgba(4, 10, 52, 0.96));
-      border-radius: 18px;
-      padding: 10px 12px;
-      border: 1px solid rgba(0, 224, 255, 0.18);
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.7);
+    /* HERO (HOME) */
+    .hero {
+      min-height: calc(100vh - 4rem);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 1.5rem 2.5rem;
+    }
+
+    .logo-wrapper {
+      position: relative;
+      width: 280px;
+      max-width: 70vw;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      animation: float-logo 8s ease-in-out infinite;
+      cursor: pointer;
+      filter: drop-shadow(0 20px 50px rgba(0, 8, 113, 0.6));
+    }
+
+    .logo-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      background: radial-gradient(circle, rgba(92, 110, 239, 0.25) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: logo-glow 4s ease-in-out infinite;
+    }
+
+    @keyframes logo-glow {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.1); }
+    }
+
+    .logo {
+      position: absolute;
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+      transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+    }
+
+    .logo-white {
+      opacity: 1;
+    }
+
+    .logo-blue {
+      opacity: 0;
+    }
+
+    .logo-wrapper:hover .logo-white {
+      opacity: 0;
+      transform: scale(0.95) rotate(-5deg);
+    }
+
+    .logo-wrapper:hover .logo-blue {
+      opacity: 1;
+      transform: scale(1.05) rotate(5deg);
+    }
+
+    .logo-wrapper:hover {
+      filter: drop-shadow(0 25px 60px rgba(92, 110, 239, 0.5));
+    }
+
+    @keyframes float-logo {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-8px) rotate(1deg); }
+      50% { transform: translateY(-15px) rotate(0deg); }
+      75% { transform: translateY(-8px) rotate(-1deg); }
+    }
+
+    .tagline {
+      font-size: 1.4rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+      text-shadow:
+        0 0 20px rgba(92, 110, 239, 0.6),
+        0 0 40px rgba(0, 8, 113, 0.4);
+      margin-top: 0.75rem;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .tagline::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(92, 110, 239, 0.6), transparent);
+    }
+
+    /* CONTACT SECTION */
+    .contact-section {
+      padding: 4rem 1.5rem 5rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .contact-wrapper {
+      width: 100%;
+      max-width: 540px;
+    }
+
+    .contact-wrapper h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.6rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff, var(--blue-bright));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .contact-wrapper p {
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+      color: #94a3b8;
+    }
+
+    .contact-form {
+      background: linear-gradient(135deg, rgba(0, 3, 20, 0.95), rgba(0, 8, 113, 0.2));
+      border-radius: 1rem;
+      padding: 2rem 1.75rem;
+      border: 1px solid rgba(92, 110, 239, 0.25);
+      box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(92, 110, 239, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
       position: relative;
       overflow: hidden;
     }
 
-    .dash-card::before {
-      content: "";
+    .contact-form::before {
+      content: '';
       position: absolute;
-      width: 140%;
-      height: 140%;
-      top: -60%;
-      right: -40%;
-      background: radial-gradient(circle at 20% 20%, rgba(0, 224, 255, 0.6), transparent 60%);
-      opacity: 0;
-      mix-blend-mode: screen;
-      transition: opacity 0.7s ease-out;
-      pointer-events: none;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(92, 110, 239, 0.5), transparent);
     }
 
-    .dash-card:hover::before {
+    .form-row {
+      margin-bottom: 1.25rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-row label {
+      font-size: 0.85rem;
+      margin-bottom: 0.4rem;
+      color: #c7d2fe;
+      font-weight: 500;
+    }
+
+    .form-row input,
+    .form-row textarea {
+      border-radius: 0.6rem;
+      border: 1px solid rgba(92, 110, 239, 0.3);
+      padding: 0.75rem 1rem;
+      background-color: rgba(0, 3, 20, 0.8);
+      color: #e5e7eb;
+      font-size: 0.95rem;
+      outline: none;
+      transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        background-color 0.3s ease,
+        transform 0.15s ease;
+    }
+
+    .form-row input::placeholder,
+    .form-row textarea::placeholder {
+      color: rgba(148, 163, 184, 0.5);
+    }
+
+    .form-row input:focus,
+    .form-row textarea:focus {
+      border-color: var(--blue-bright);
+      box-shadow: 
+        0 0 0 3px rgba(92, 110, 239, 0.2),
+        0 0 20px rgba(0, 8, 113, 0.3);
+      background-color: rgba(0, 5, 30, 0.95);
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      padding: 0.8rem 1.8rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--blue-deep), var(--blue-medium));
+      box-shadow: 
+        0 10px 30px rgba(0, 8, 113, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      position: relative;
+      overflow: hidden;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, var(--blue-bright), var(--cyan-accent));
+      border-radius: inherit;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 
+        0 20px 40px rgba(0, 8, 113, 0.6),
+        0 0 30px rgba(92, 110, 239, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-primary:hover::before {
       opacity: 1;
     }
 
-    .dash-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 6px;
+    .btn-primary:hover::after {
+      opacity: 0.3;
     }
 
-    .dash-label span {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
+    .btn-primary:active {
+      transform: translateY(0) scale(0.98);
+      box-shadow: 
+        0 5px 15px rgba(0, 8, 113, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
-    .dash-pill {
-      font-size: 0.65rem;
-      padding: 2px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(0, 224, 255, 0.5);
-      color: var(--accent);
-      background: rgba(0, 224, 255, 0.05);
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
     }
 
-    .dash-value {
-      font-size: 1.15rem;
-      font-weight: 650;
-      letter-spacing: -0.03em;
-      margin-bottom: 4px;
-    }
-
-    .dash-meta {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 6px;
-    }
-
-    .dash-trend {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-weight: 600;
-      font-size: 0.7rem;
-    }
-
-    .dash-trend--positive {
-      color: #5cffc6;
-    }
-
-    .dash-trend-arrow {
-      width: 9px;
-      height: 9px;
-      border-radius: 2px;
-      border-left: 2px solid currentColor;
-      border-bottom: 2px solid currentColor;
-      transform: rotate(135deg);
-    }
-
-    .dash-sites {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 6px;
-      margin-top: 4px;
-    }
-
-    .dash-site-pill {
-      font-size: 0.7rem;
-      padding: 4px 7px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .dash-site-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .dash-bar-group {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 3px;
-      align-items: flex-end;
-      margin-top: 6px;
-    }
-
-    .dash-bar {
-      border-radius: 999px;
-      background: linear-gradient(180deg, var(--accent), var(--primary-soft));
-      box-shadow: 0 0 10px rgba(0, 224, 255, 0.7);
-      opacity: 0.9;
-    }
-
-    .dash-bar:nth-child(1) {
-      height: 30px;
-    }
-
-    .dash-bar:nth-child(2) {
-      height: 52px;
-    }
-
-    .dash-bar:nth-child(3) {
-      height: 38px;
-    }
-
-    .dash-bar:nth-child(4) {
-      height: 60px;
-    }
-
-    .dash-mini-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    .dash-mini-pill {
-      flex: 1;
-      padding: 6px 8px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      font-size: 0.7rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 4px;
-    }
-
-    .dash-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.72rem;
-      color: #5cffc6;
-    }
-
-    .dash-status-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #5cffc6;
-      box-shadow: 0 0 10px rgba(92, 255, 198, 0.9);
-    }
-
-    .dash-status-label {
-      font-size: 0.68rem;
-      color: var(--text-muted);
-    }
-
-    .dash-footer-row {
-      margin-top: 8px;
-      display: flex;
-      justify-content: flex-start;
-    }
-
-    .dash-chip {
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(0, 224, 255, 0.45);
-      background: rgba(0, 0, 0, 0.7);
-      font-size: 0.7rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--text-main);
-    }
-
-    .dash-chip span {
-      font-size: 0.72rem;
-      color: var(--accent);
-    }
-
-    @keyframes orbitPulse {
-      0% {
-        transform: rotate(0deg);
-        opacity: 0.45;
-      }
-      50% {
-        opacity: 0.8;
-      }
-      100% {
-        transform: rotate(360deg);
-        opacity: 0.45;
-      }
-    }
-
-    @media (max-width: 960px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-        padding-top: 26px;
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav {
+        padding-inline: 1rem;
       }
 
-      .hero-visual {
-        order: -1;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .hero {
-        padding-bottom: 34px;
+      .tagline {
+        font-size: 1rem;
+        letter-spacing: 0.25em;
+        white-space: normal;
       }
 
-      .hero-cta-row {
-        flex-direction: column;
-        align-items: stretch;
+      .contact-section {
+        padding-inline: 1.25rem;
       }
 
-      .btn {
-        justify-content: center;
-        width: 100%;
+      .glow-orb {
+        filter: blur(60px);
       }
 
-      .hero-metrics {
-        flex-direction: column;
-        align-items: stretch;
-      }
-    }
-
-    /* Sections generic */
-    .section {
-      margin-bottom: 52px;
-      position: relative;
-    }
-
-    .section::before {
-      content: "";
-      position: absolute;
-      inset-block: 6px;
-      left: -6px;
-      width: 2px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, rgba(0, 224, 255, 0.9), transparent);
-      opacity: 0.45;
-    }
-
-    .lang-ar .section::before {
-      left: auto;
-      right: -6px;
-      transform: scaleX(-1);
-    }
-
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-
-    .section-kicker {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--accent);
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section-kicker::before {
-      content: "";
-      width: 36px;
-      height: 1px;
-      background: linear-gradient(90deg, rgba(0, 224, 255, 0.8), transparent);
-    }
-
-    .section-title {
-      font-size: 1.4rem;
-      font-weight: 650;
-      letter-spacing: -0.02em;
-    }
-
-    .section-subtitle {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      max-width: 420px;
-      line-height: 1.6;
-    }
-
-    @media (max-width: 720px) {
-      .section-header {
-        flex-direction: column;
-        align-items: flex-start;
+      .glow-orb:nth-child(1) {
+        width: 250px;
+        height: 250px;
       }
 
-      .section::before {
+      .glow-orb:nth-child(2) {
+        width: 200px;
+        height: 200px;
+      }
+
+      .glow-orb:nth-child(3) {
+        width: 220px;
+        height: 220px;
+      }
+
+      .glow-orb:nth-child(4) {
         display: none;
       }
     }
 
-    /* Strategy & USP */
-    .grid-2 {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 18px;
-      align-items: stretch;
-    }
+    @media (max-width: 480px) {
+      .logo-wrapper {
+        width: 220px;
+      }
 
-    .card {
-      border-radius: var(--radius-lg);
-      padding: 18px 18px 16px;
-      background: radial-gradient(circle at 0 0, rgba(0, 224, 255, 0.1), transparent 55%),
-        radial-gradient(circle at 120% 120%, rgba(0, 8, 113, 0.7), transparent 55%),
-        var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      position: relative;
-      overflow: hidden;
-    }
+      .contact-wrapper h2 {
+        font-size: 1.5rem;
+      }
 
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg, rgba(0, 224, 255, 0.06), transparent 50%, rgba(255, 255, 255, 0.04));
-      opacity: 0.6;
-      mix-blend-mode: soft-light;
-      pointer-events: none;
-    }
+      .contact-form {
+        padding: 1.5rem 1.25rem;
+      }
 
-    .card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .card-title {
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-    }
-
-    .card-tag {
-      font-size: 0.7rem;
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .card-body {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    .card-body p {
-      margin: 0 0 8px;
-    }
-
-    .card-list {
-      list-style: none;
-      padding: 0;
-      margin: 6px 0 0;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    .card-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      margin-bottom: 6px;
-    }
-
-    .card-bullet {
-      margin-top: 5px;
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 12px rgba(0, 224, 255, 0.8);
-      flex-shrink: 0;
-    }
-
-    .usp-highlight {
-      margin-top: 10px;
-      padding: 10px 11px;
-      border-radius: 12px;
-      border: 1px dashed rgba(0, 224, 255, 0.5);
-      background: rgba(0, 224, 255, 0.04);
-      font-size: 0.85rem;
-      color: #d9e5ff;
-    }
-
-    .usp-highlight strong {
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    @media (max-width: 880px) {
-      .grid-2 {
-        grid-template-columns: minmax(0, 1fr);
+      .shooting-star {
+        display: none;
       }
     }
 
-    /* Pain / desires */
-    .grid-2-balanced {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    .card--alert {
-      border-color: rgba(255, 75, 100, 0.6);
-      background: radial-gradient(circle at 0 0, rgba(255, 75, 100, 0.18), transparent 55%),
-        var(--bg-card);
-    }
-
-    .card--alert .card-title {
-      color: #ff9ba9;
-    }
-
-    .card--success {
-      border-color: rgba(92, 255, 198, 0.6);
-      background: radial-gradient(circle at 0 0, rgba(92, 255, 198, 0.14), transparent 55%),
-        var(--bg-card);
-    }
-
-    .card--success .card-title {
-      color: #c9ffea;
-    }
-
-    .card-pill {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    @media (max-width: 840px) {
-      .grid-2-balanced {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    /* Values */
-    .values-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .value-card {
-      border-radius: 16px;
-      padding: 12px 11px 11px;
-      background: rgba(0, 0, 0, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .value-card::before {
-      content: "";
-      position: absolute;
-      inset: -1px;
-      border-radius: inherit;
-      background: radial-gradient(circle at 0 0, rgba(0, 224, 255, 0.2), transparent 55%);
-      opacity: 0;
-      transition: opacity var(--transition-med);
-      pointer-events: none;
-    }
-
-    .value-card:hover::before {
-      opacity: 1;
-    }
-
-    .value-kicker {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--accent);
-      margin-bottom: 4px;
-    }
-
-    .value-title {
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .value-body {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    @media (max-width: 960px) {
-      .values-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 640px) {
-      .values-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    /* Offers overview */
-    .offers-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      gap: 18px;
-    }
-
-    .offer-card {
-      border-radius: 18px;
-      padding: 14px 14px 12px;
-      background: radial-gradient(circle at 0 0, rgba(0, 224, 255, 0.15), transparent 55%), var(--bg-card);
-      border: 1px solid rgba(0, 224, 255, 0.5);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .offer-badge {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--accent);
-      margin-bottom: 4px;
-    }
-
-    .offer-title {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .offer-sub {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .offer-list {
-      list-style: none;
-      padding: 0;
-      margin: 6px 0 0;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    .offer-list li {
-      display: flex;
-      gap: 6px;
-      align-items: flex-start;
-      margin-bottom: 4px;
-    }
-
-    .offer-dot {
-      flex-shrink: 0;
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent);
-      margin-top: 4px;
-    }
-
-    .offer-footnote {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 8px;
-      opacity: 0.9;
-    }
-
-    .offer-card--dark {
-      background: radial-gradient(circle at 120% 0, rgba(0, 8, 113, 0.7), transparent 55%), var(--bg-card);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    @media (max-width: 840px) {
-      .offers-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    /* Contact */
-    .contact-card {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 18px;
-      border-radius: 22px;
-      padding: 18px 18px 16px;
-      background: radial-gradient(circle at 0 0, rgba(0, 224, 255, 0.2), transparent 55%), var(--bg-card);
-      border: 1px solid rgba(0, 224, 255, 0.4);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .contact-info {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    .contact-info p {
-      margin: 0 0 10px;
-    }
-
-    .contact-point {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.85rem;
-      margin-bottom: 6px;
-    }
-
-    .contact-point-label {
-      color: var(--text-main);
-      font-weight: 500;
-    }
-
-    .contact-point a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .contact-point a:hover {
-      text-decoration: underline;
-    }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .form-field {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      font-size: 0.8rem;
-    }
-
-    .form-label {
-      color: var(--text-muted);
-    }
-
-    .form-input,
-    .form-textarea,
-    .form-select {
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(0, 0, 0, 0.75);
-      color: var(--text-main);
-      font-size: 0.85rem;
-      padding: 7px 9px;
-      outline: none;
-      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
-      font-family: inherit;
-    }
-
-    .form-input::placeholder,
-    .form-textarea::placeholder {
-      color: rgba(164, 172, 197, 0.6);
-    }
-
-    .form-input:focus,
-    .form-textarea:focus,
-    .form-select:focus {
-      border-color: rgba(0, 224, 255, 0.7);
-      box-shadow: 0 0 0 1px rgba(0, 224, 255, 0.4);
-      background: rgba(3, 6, 30, 0.95);
-    }
-
-    .form-textarea {
-      min-height: 80px;
-      resize: vertical;
-    }
-
-    .form-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    .form-hint {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    .form-status {
-      font-size: 0.78rem;
-      color: #5cffc6;
-      min-height: 1em;
-    }
-
-    .contact-form.is-submitted .btn-primary {
-      opacity: 0.85;
-    }
-
-    @media (max-width: 840px) {
-      .contact-card {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    @media (max-width: 640px) {
-      .form-row {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .form-footer {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .form-footer .btn {
-        width: 100%;
-        justify-content: center;
-      }
-    }
-
-    /* Footer */
-    .footer {
-      margin-top: 32px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .footer a:hover {
-      text-decoration: underline;
-    }
-
-    /* Scroll / reveal animations */
-    [data-animate] {
-      opacity: 0;
-      transform: translateY(24px);
-      transition:
-        opacity var(--transition-med),
-        transform var(--transition-med),
-        box-shadow var(--transition-med),
-        border-color var(--transition-med),
-        background var(--transition-med);
-    }
-
-    [data-animate].in-view {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    [data-animate="fade-left"] {
-      transform: translateX(26px);
-    }
-
-    [data-animate="fade-left"].in-view {
-      transform: translateX(0);
-    }
-
-    [data-animate="fade-right"] {
-      transform: translateX(-26px);
-    }
-
-    [data-animate="fade-right"].in-view {
-      transform: translateX(0);
-    }
-
-    [data-animate="scale-in"] {
-      transform: scale(0.94);
-    }
-
-    [data-animate="scale-in"].in-view {
-      transform: scale(1);
-    }
-
-    [data-animate="fade-up"] {
-      transform: translateY(24px);
-    }
-
-    [data-animate="fade-up"].in-view {
-      transform: translateY(0);
-    }
-
-    /* Arabic specifics */
-    .lang-ar .hero-micro::before {
-      display: none;
-    }
-
-    .lang-ar .section-kicker::before {
-      transform: scaleX(-1);
-    }
-
-    .lang-ar .contact-card {
-      direction: rtl;
-      text-align: right;
-    }
-
-    .lang-ar .form-field,
-    .lang-ar .contact-form,
-    .lang-ar .contact-info {
-      text-align: right;
-    }
-
-    .lang-ar .contact-point {
-      justify-content: flex-end;
-    }
-
-    .lang-ar .hero-cta-row,
-    .lang-ar .form-footer {
-      flex-direction: row-reverse;
-    }
-
-    @media (max-width: 640px) {
-      .lang-ar .hero-cta-row {
-        flex-direction: column;
-      }
-
-      .lang-ar .form-footer {
-        flex-direction: column-reverse;
-      }
-    }
-
-    /* Bouton flèche "remonter en haut" */
-    .scroll-top {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      width: 42px;
-      height: 42px;
-      border-radius: 999px;
-      border: 1px solid rgba(0, 224, 255, 0.7);
-      background: radial-gradient(circle at 0 0, rgba(0, 224, 255, 0.35), rgba(0, 8, 113, 0.9));
-      color: #020317;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-      cursor: pointer;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.85);
-      z-index: 80;
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast);
-    }
-
-    .scroll-top.visible {
-      display: flex;
-    }
-
-    .scroll-top:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.9);
-    }
-
-    /* Réduction de mouvement (accessibilité) */
+    /* Reduced motion */
     @media (prefers-reduced-motion: reduce) {
-      html,
-      body {
-        scroll-behavior: auto;
-      }
-
-      [data-animate] {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-      }
-
-      .hero-orbit {
-        animation: none !important;
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
 </head>
-<body class="lang-fr">
-  <header class="top-nav">
-    <div class="top-nav-inner">
-      <div class="brand-block">
-        <div class="brand-logo">
-          <img
-            src="logo.png"
-            alt="Mazoo logo"
-            loading="lazy"
-          />
-        </div>
-        <div class="brand-text">
-          <div class="brand-name">Mazoo</div>
-          <div class="brand-tagline">Carburant &amp; Maintenance sous contrôle</div>
-        </div>
+<body>
+  <!-- Background layers -->
+  <div class="bg-base"></div>
+  <div class="nebula-layer"></div>
+  <div class="nebula-layer-2"></div>
+  <div class="stars-small"></div>
+  <div class="stars-medium"></div>
+  <div class="stars-large"></div>
+  <div class="shooting-stars">
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+  </div>
+  <div class="glow-orbs">
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
+  </div>
+  <div class="grid-overlay"></div>
+  <div class="vignette"></div>
+
+  <header>
+    <nav class="nav">
+      <a href="#home" class="nav-brand">Your Brand</a>
+      <div class="nav-links">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#contact" class="nav-link">Contact</a>
       </div>
-      <nav class="nav-main" aria-label="Navigation principale">
-        <div class="nav-links nav-links-fr">
-          <button class="nav-link" data-section="vision" type="button">Vision</button>
-          <button class="nav-link" data-section="pain" type="button">Problèmes</button>
-          <button class="nav-link" data-section="solution" type="button">Solution</button>
-          <button class="nav-link nav-link--primary" data-section="contact" type="button">Contact</button>
-        </div>
-        <div class="nav-links nav-links-ar">
-          <button class="nav-link" data-section="vision" type="button">الرؤية</button>
-          <button class="nav-link" data-section="pain" type="button">التحديات</button>
-          <button class="nav-link" data-section="solution" type="button">الحل</button>
-          <button class="nav-link nav-link--primary" data-section="contact" type="button">تواصل</button>
-        </div>
-        <div class="language-switch" aria-label="Choix de langue">
-          <button class="lang-toggle active" data-lang="fr" type="button">FR</button>
-          <button class="lang-toggle" data-lang="ar" type="button">العربية</button>
-        </div>
-      </nav>
-    </div>
+    </nav>
   </header>
 
-  <main class="page-shell">
-    <!-- ================= FRENCH VERSION ================= -->
-    <section id="fr-page" class="lang-section lang-fr">
-      <!-- Hero -->
-      <section id="fr-hero" class="hero">
-        <div data-animate="fade-right">
-          <div class="hero-badge-row">
-            <div class="hero-badge">
-              <span class="hero-badge-dot"></span>
-              <span>SaaS + Hardware</span>
-            </div>
-            <div class="hero-subtag">Flottes BTP · Transport · Industrie</div>
-          </div>
-          <h1 class="hero-title">
-            La <span class="highlight">tour de contrôle carburant &amp; maintenance</span><br />
-            pour vos flottes multi-sites.
-          </h1>
-          <p class="hero-lead">
-            Mazoo aide les entreprises marocaines à reprendre le contrôle sur chaque litre et chaque
-            intervention, en unifiant
-            <strong>dépôts fixes, citernes mobiles et engins</strong> dans une plateforme simple qui parle
-            le langage du terrain, pas celui de l’informatique.
-          </p>
-          <div class="hero-micro">Conçu pour "Karim", le gestionnaire multi-opérations pressé et pragmatique.</div>
-          <div class="hero-cta-row">
-            <button class="btn btn-primary" data-section="contact" type="button">
-              <span>Demander une démo</span>
-              <span class="btn-icon">▶</span>
-            </button>
-            <button class="btn btn-secondary" data-section="contact" type="button">
-              <span>Planifier un RDV</span>
-            </button>
-          </div>
-          <div class="hero-footnote">
-            Pour moins de <span>quelques litres économisés par véhicule</span>, la solution se rembourse
-            d’elle-même.
-          </div>
-          <div class="hero-metrics">
-            <div class="hero-metric">
-              <span class="hero-metric-label">Couverture</span>
-              <span class="hero-metric-value">Dépôts · Citernes mobiles · Engins</span>
-            </div>
-            <div class="hero-metric">
-              <span class="hero-metric-label">Modèle</span>
-              <span class="hero-metric-value">SaaS + Hardware</span>
-            </div>
-            <div class="hero-metric">
-              <span class="hero-metric-label">Secteurs</span>
-              <span class="hero-metric-value">BTP · Transport · Industrie</span>
-            </div>
-          </div>
-        </div>
-        <div class="hero-visual" data-animate="fade-left">
-          <div class="hero-grid"></div>
-          <div class="hero-orbit"></div>
-          <div class="hero-dashboard">
-            <div class="dash-row">
-              <div class="dash-card">
-                <div class="dash-label">
-                  <span>Vue 360° flotte</span>
-                  <span class="dash-pill">Temps réel</span>
-                </div>
-                <div class="dash-value">+18% rentabilité carburant</div>
-                <div class="dash-meta">
-                  <span>Multi-sites | Dépôts + citernes mobiles</span>
-                  <span class="dash-trend dash-trend--positive">
-                    <span class="dash-trend-arrow"></span>
-                    <span>-12% pertes</span>
-                  </span>
-                </div>
-                <div class="dash-sites">
-                  <div class="dash-site-pill">
-                    <span class="dash-site-dot"></span>
-                    <span>Chantier BTP · Sud</span>
-                  </div>
-                  <div class="dash-site-pill">
-                    <span class="dash-site-dot"></span>
-                    <span>Dépôt routier · Nord</span>
-                  </div>
-                </div>
-              </div>
-              <div class="dash-card">
-                <div class="dash-label">
-                  <span>Maintenance préventive</span>
-                  <span class="dash-pill">Alertes terrain</span>
-                </div>
-                <div class="dash-meta">
-                  <span>Pannes évitées ce mois</span>
-                  <span class="dash-trend dash-trend--positive">
-                    <span class="dash-trend-arrow"></span>
-                    <span>–7 arrêts</span>
-                  </span>
-                </div>
-                <div class="dash-bar-group">
-                  <div class="dash-bar"></div>
-                  <div class="dash-bar"></div>
-                  <div class="dash-bar"></div>
-                  <div class="dash-bar"></div>
-                </div>
-                <div class="dash-mini-row">
-                  <div class="dash-mini-pill">
-                    <span>Alertes critiques</span>
-                    <span style="color:#ff9ba9;font-weight:600;">2</span>
-                  </div>
-                  <div class="dash-mini-pill">
-                    <span>Entretiens à planifier</span>
-                    <span style="color:#5cffc6;font-weight:600;">9</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="dash-card" style="margin-top:10px;">
-              <div class="dash-label">
-                <span>Traçabilité carburant</span>
-                <span class="dash-pill">Fournisseur → Moteur</span>
-              </div>
-              <div class="dash-value" style="font-size:1rem;">Aucune zone d’ombre entre dépôt, citerne mobile et engins.</div>
-              <div class="dash-meta">
-                <span>Données consolidées par site &amp; par véhicule</span>
-                <span class="dash-status">
-                  <span class="dash-status-dot"></span>
-                  <span>Confiance données 99,2%</span>
-                </span>
-              </div>
-              <div class="dash-footer-row">
-                <div class="dash-chip">
-                  <span>ROI</span> 1 à 3 mois
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Vision / USP -->
-      <section id="fr-vision" class="section">
-        <div class="section-header">
-          <div>
-            <div class="section-kicker">Stratégie &amp; positionnement</div>
-            <h2 class="section-title">Plus de visibilité. Moins de pertes. Enfin du contrôle.</h2>
-          </div>
-          <p class="section-subtitle">
-            Mazoo apporte transparence et simplicité dans la gestion de flotte pour permettre aux entreprises
-            marocaines de <strong>maîtriser leurs coûts réels</strong>, sans complexité technique ni jargon
-            informatique.
-          </p>
-        </div>
-        <div class="grid-2">
-          <article class="card" data-animate="fade-right">
-            <div class="card-header">
-              <h3 class="card-title">Vision &amp; Mission</h3>
-              <span class="card-tag">Cap Nord</span>
-            </div>
-            <div class="card-body">
-              <p>
-                <strong>Vision :</strong> être le premier réflexe des entreprises marocaines pour la
-                sécurisation et l’optimisation de leur flotte, grâce à une solution éprouvée qui résout les
-                vrais problèmes du terrain.
-              </p>
-              <p>
-                <strong>Mission :</strong> digitaliser la gestion de flotte par une approche flexible
-                <strong>(SaaS + Hardware)</strong> qui centralise les données de carburant et d’entretien, afin
-                de simplifier la prise de décision et l’accompagnement de nos clients.
-              </p>
-            </div>
-          </article>
-
-          <article class="card" data-animate="fade-left">
-            <div class="card-header">
-              <h3 class="card-title">Pourquoi Mazoo ?</h3>
-              <span class="card-tag">USP</span>
-            </div>
-            <div class="card-body">
-              <p>
-                Notre promesse : une <strong>solution de gouvernance unifiée</strong> qui traite enfin le
-                carburant et la maintenance comme un <strong>levier de rentabilité</strong>, et pas comme une
-                ligne de coût subie.
-              </p>
-              <ul class="card-list">
-                <li>
-                  <span class="card-bullet"></span>
-                  <span>Vue consolidée sur tous vos sites : siège, dépôts régionaux, chantiers temporaires.</span>
-                </li>
-                <li>
-                  <span class="card-bullet"></span>
-                  <span>Suivi complet du litre : du fournisseur, au dépôt, à la citerne mobile, jusqu’au moteur de l’engin.</span>
-                </li>
-                <li>
-                  <span class="card-bullet"></span>
-                  <span>Interface simple, pensée pour vos équipes terrain, pas pour des ingénieurs IT.</span>
-                </li>
-              </ul>
-              <div class="usp-highlight">
-                <strong>USP Mazoo :</strong> une solution de gouvernance unifiée (carburant + maintenance) qui
-                transforme vos données terrain en levier de rentabilité, grâce à une interface simple conçue
-                pour stopper les pertes financières.
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- Pains & desires -->
-      <section id="fr-pain" class="section">
-        <div class="section-header">
-          <div>
-            <div class="section-kicker">Pour qui ?</div>
-            <h2 class="section-title">Pensé pour “Karim”, le gestionnaire multi-opérations.</h2>
-          </div>
-          <p class="section-subtitle">
-            Propriétaire, DG, Directeur Technique ou Logistique dans le BTP, le transport ou l’industrie. Flotte
-            complexe, sites éloignés, camions-citernes… et aucune envie de perdre du temps dans des Excel
-            incohérents.
-          </p>
-        </div>
-        <div class="grid-2-balanced">
-          <article class="card card--alert" data-animate="fade-right">
-            <div class="card-pill">Ce qui vous empêche de dormir</div>
-            <h3 class="card-title">Les fuites invisibles qui coûtent très cher.</h3>
-            <ul class="card-list">
-              <li>
-                <span class="card-bullet"></span>
-                <span><strong>Cécité à distance :</strong> impossible de voir ce qui se passe réellement dans les dépôts et chantiers éloignés.</span>
-              </li>
-              <li>
-                <span class="card-bullet"></span>
-                <span><strong>“Trou noir” de la citerne mobile :</strong> vous ne savez pas si ce qui sort de la citerne correspond vraiment à ce qui entre dans les engins.</span>
-              </li>
-              <li>
-                <span class="card-bullet"></span>
-                <span><strong>Opacité des coûts :</strong> aucune vue consolidée sur la consommation globale et la santé de vos véhicules.</span>
-              </li>
-              <li>
-                <span class="card-bullet"></span>
-                <span><strong>Pannes évitables :</strong> des engins à l’arrêt sur des chantiers isolés faute d’entretien préventif.</span>
-              </li>
-            </ul>
-          </article>
-
-          <article class="card card--success" data-animate="fade-left">
-            <div class="card-pill">Ce que vous voulez vraiment</div>
-            <h3 class="card-title">Garder la main sur votre flotte, même à 500 km.</h3>
-            <ul class="card-list">
-              <li>
-                <span class="card-bullet"></span>
-                <span><strong>Vue 360° :</strong> tout voir en un coup d’œil : niveau des cuves, position de la citerne mobile, consommation par engin.</span>
-              </li>
-              <li>
-                <span class="card-bullet"></span>
-                <span><strong>Traçabilité totale :</strong> suivre le litre de carburant du fournisseur jusqu’au moteur, sans zone d’ombre.</span>
-              </li>
-              <li>
-                <span class="card-bullet"></span>
-                <span><strong>Contrôle à distance :</strong> gérer chaque site comme si vous étiez sur place, sans vous déplacer.</span>
-              </li>
-              <li>
-                <span class="card-bullet"></span>
-                <span><strong>Confiance dans les chiffres :</strong> des données incontestables pour challenger vos équipes en cas d’anomalie.</span>
-              </li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <!-- Values -->
-      <section class="section">
-        <div class="section-header">
-          <div>
-            <div class="section-kicker">Ce qui nous guide</div>
-            <h2 class="section-title">Des valeurs forgées sur le terrain, pas en salle de réunion.</h2>
-          </div>
-          <p class="section-subtitle">
-            Nous parlons le langage du BTP et du transport. Mazoo est né dans la poussière des chantiers, au
-            contact des chauffeurs et des responsables d’exploitation.
-          </p>
-        </div>
-        <div class="values-grid">
-          <article class="value-card" data-animate="scale-in">
-            <div class="value-kicker">Valeur #1</div>
-            <h3 class="value-title">Simplicité</h3>
-            <p class="value-body">
-              La technologie doit servir l’homme, pas l’inverse. Nous créons des solutions intuitives qui
-              <strong>enlèvent</strong> de la complexité, pas qui en rajoutent.
-            </p>
-          </article>
-          <article class="value-card" data-animate="scale-in">
-            <div class="value-kicker">Valeur #2</div>
-            <h3 class="value-title">Intégrité</h3>
-            <p class="value-body">
-              Nous vendons de la transparence sur le carburant, nous devons donc être <strong>irréprochables</strong>.
-              Dire la vérité au client, même quand ça fait mal, est non négociable.
-            </p>
-          </article>
-          <article class="value-card" data-animate="scale-in">
-            <div class="value-kicker">Valeur #3</div>
-            <h3 class="value-title">Terrain</h3>
-            <p class="value-body">
-              Nous ne sommes pas des développeurs enfermés dans un bureau. Nous comprenons la poussière, les
-              camions et les chauffeurs. Nos solutions sont nées de la réalité opérationnelle.
-            </p>
-          </article>
-          <article class="value-card" data-animate="scale-in">
-            <div class="value-kicker">Valeur #4</div>
-            <h3 class="value-title">Customer Success</h3>
-            <p class="value-body">
-              Nous ne livrons pas juste un logiciel, nous accompagnons un changement. Le <strong>succès du
-              client</strong> (économies réalisées) est notre seule mesure de réussite.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <!-- Offers (high level, no pricing detail) -->
-      <section id="fr-solution" class="section">
-        <div class="section-header">
-          <div>
-            <div class="section-kicker">Offre &amp; modèle</div>
-            <h2 class="section-title">Deux niveaux, une seule logique : sécuriser puis scaler.</h2>
-          </div>
-          <p class="section-subtitle">
-            Vous commencez petit, sur un site ou une flotte limitée, puis vous étendez progressivement jusqu’à
-            transformer votre flotte en centre de profit piloté par les données.
-          </p>
-        </div>
-        <div class="offers-grid">
-          <article class="offer-card" data-animate="fade-right">
-            <div class="offer-badge">Pack Essentiel</div>
-            <h3 class="offer-title">Votre “pied dans la porte” digital.</h3>
-            <p class="offer-sub">
-              Pour un site unique ou une petite flotte. ROI quasi immédiat, sans prise de risque.
-            </p>
-            <ul class="offer-list">
-              <li>
-                <span class="offer-dot"></span>
-                <span>Accès à la plateforme pour centraliser carburant &amp; maintenance.</span>
-              </li>
-              <li>
-                <span class="offer-dot"></span>
-                <span>Installation ciblée sur un dépôt ou un chantier pilote.</span>
-              </li>
-              <li>
-                <span class="offer-dot"></span>
-                <span>Indicateurs simples : pertes évitées, dérives détectées, pannes prévenues.</span>
-              </li>
-              <li>
-                <span class="offer-dot"></span>
-                <span>Idéal pour “tester” la solution et embarquer vos équipes.</span>
-              </li>
-            </ul>
-            <div class="offer-footnote">
-              Si vous économisez seulement <strong>quelques litres par camion</strong>, le système est déjà
-              remboursé.
-            </div>
-          </article>
-
-          <article class="offer-card offer-card--dark" data-animate="fade-left">
-            <div class="offer-badge">Pack Premium Multi-Sites</div>
-            <h3 class="offer-title">La tour de contrôle complète.</h3>
-            <p class="offer-sub">
-              Pour les entreprises mûres avec plusieurs dépôts, chantiers et sites opérationnels.
-            </p>
-            <ul class="offer-list">
-              <li>
-                <span class="offer-dot"></span>
-                <span>Supervision centralisée de tous vos sites (fixes et mobiles).</span>
-              </li>
-              <li>
-                <span class="offer-dot"></span>
-                <span>Intégration ERP, API données et application mobile pour vos équipes.</span>
-              </li>
-              <li>
-                <span class="offer-dot"></span>
-                <span>Support dédié &amp; accompagnement Customer Success orienté économies concrètes.</span>
-              </li>
-              <li>
-                <span class="offer-dot"></span>
-                <span>Modèle de revenus scalable, conçu pour connecter progressivement toute votre flotte.</span>
-              </li>
-            </ul>
-            <div class="offer-footnote">
-              Objectif : <strong>standardiser votre gouvernance carburant &amp; maintenance</strong> sur tous les
-              sites, et rendre le retour en arrière impensable.
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- Contact -->
-      <section id="fr-contact" class="section">
-        <div class="section-header">
-          <div>
-            <div class="section-kicker">Passer à l’action</div>
-            <h2 class="section-title">Un échange de 20 minutes pour éclairer vos chiffres.</h2>
-          </div>
-          <p class="section-subtitle">
-            Dites-nous comment est structurée votre flotte aujourd’hui. Nous vous montrons, sur un seul écran,
-            où se cachent vos pertes et comment les reprendre en main.
-          </p>
-        </div>
-
-        <div class="contact-card" data-animate="fade-up">
-          <div class="contact-info">
-            <p>
-              Remplissez le formulaire et nous reviendrons vers vous pour :
-            </p>
-            <ul class="card-list" style="margin-top:2px;">
-              <li>
-                <span class="card-bullet"></span>
-                <span>Planifier une démo personnalisée de la plateforme Mazoo.</span>
-              </li>
-              <li>
-                <span class="card-bullet"></span>
-                <span>Ou organiser un RDV (visio ou présentiel) selon vos contraintes.</span>
-              </li>
-            </ul>
-
-            <div style="margin-top:10px;">
-              <div class="contact-point">
-                <span class="contact-point-label">Email :</span>
-                <a href="mailto:contact@mazoo.xyz">contact@mazoo.xyz</a>
-              </div>
-              <div class="contact-point">
-                <span class="contact-point-label">LinkedIn :</span>
-                <a href="https://www.linkedin.com/in/adnane-saidi-50493520b/" target="_blank" rel="noopener noreferrer">Adnane
-                  Saidi</a>
-              </div>
-            </div>
-
-            <p style="margin-top:10px;font-size:0.8rem;">
-              Nous parlons <strong>français</strong> et <strong>arabe</strong>, et surtout votre langage métier :
-              chantiers, dépôts, camions &amp; rentabilité.
-            </p>
-          </div>
-
-          <form class="contact-form" id="contact-form-fr">
-            <div class="form-row">
-              <div class="form-field">
-                <label for="fr-name" class="form-label">Nom &amp; Prénom</label>
-                <input id="fr-name" name="name" type="text" class="form-input" placeholder="Ex. Karim El Amrani" required />
-              </div>
-              <div class="form-field">
-                <label for="fr-company" class="form-label">Entreprise</label>
-                <input id="fr-company" name="company" type="text" class="form-input" placeholder="Nom de votre société" />
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-field">
-                <label for="fr-email" class="form-label">Email professionnel</label>
-                <input id="fr-email" name="email" type="email" class="form-input" placeholder="vous@entreprise.ma" required />
-              </div>
-              <div class="form-field">
-                <label for="fr-phone" class="form-label">Téléphone</label>
-                <input id="fr-phone" name="phone" type="tel" class="form-input" placeholder="+212 ..." />
-              </div>
-            </div>
-            <div class="form-field">
-              <label for="fr-topic" class="form-label">Objet</label>
-              <select id="fr-topic" name="topic" class="form-select">
-                <option value="demo">Demander une démo</option>
-                <option value="rdv">Planifier un RDV</option>
-                <option value="question">Question générale</option>
-              </select>
-            </div>
-            <div class="form-field">
-              <label for="fr-message" class="form-label">Message</label>
-              <textarea id="fr-message" name="message" class="form-textarea" placeholder="Quelques lignes sur votre flotte (secteur, nombre de sites, principaux défis)..."></textarea>
-            </div>
-            <div class="form-footer">
-              <div class="form-hint">
-                Pas de spam, pas de forcing. Juste une conversation honnête sur vos chiffres.
-              </div>
-              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
-                <button type="submit" class="btn btn-primary">
-                  <span>Envoyer la demande</span>
-                </button>
-                <div id="form-status-fr" class="form-status"></div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </section>
-
-      <footer class="footer">
-        <div>© <span id="year-fr"></span> Mazoo. Tous droits réservés.</div>
-        <div>
-          Site vitrine – gestion de flotte carburant &amp; maintenance –&nbsp;
-          <a href="mailto:contact@mazoo.xyz">contact@mazoo.xyz</a>
-        </div>
-      </footer>
+  <main>
+    <section id="home" class="hero">
+      <div class="logo-wrapper" title="Hover to see the blue logo">
+        <img src="logo-white.png" alt="Your Brand Logo - White" class="logo logo-white" />
+        <img src="logo-blue.png" alt="Your Brand Logo - Blue" class="logo logo-blue" />
+      </div>
+      <p class="tagline">Build Connect Innovate</p>
     </section>
 
-    <!-- ================= ARABIC VERSION ================= -->
-    <section id="ar-page" class="lang-section lang-ar" hidden>
-      <!-- Hero AR -->
-      <section id="ar-hero" class="hero">
-        <div data-animate="fade-left">
-          <div class="hero-badge-row" style="justify-content:flex-end;">
-            <div class="hero-subtag">أساطيل البناء · النقل · الصناعة</div>
-            <div class="hero-badge">
-              <span>SaaS + Hardware</span>
-              <span class="hero-badge-dot"></span>
-            </div>
-          </div>
-          <h1 class="hero-title">
-            <span class="highlight">برج المراقبة للوقود والصيانة</span><br />
-            لأسطولك المتعدد المواقع.
-          </h1>
-          <p class="hero-lead">
-            Mazoo تساعد الشركات المغربية على استعادة التحكم في كل لتر وكل تدخل صيانة، عبر منصة موحدة
-            تجمع <strong>الخزانات الثابتة، الشاحنات الصهريجية المتنقلة والآليات</strong> في واجهة بسيطة
-            تتحدث لغة الميدان، وليس لغة الـ IT.
-          </p>
-          <div class="hero-micro">مصمم لـ "كريم" مدير العمليات المتعددة، العملي والمستعجل.</div>
-          <div class="hero-cta-row">
-            <button class="btn btn-primary" data-section="contact" type="button">
-              <span>طلب عرض توضيحي</span>
-              <span class="btn-icon">▶</span>
-            </button>
-            <button class="btn btn-secondary" data-section="contact" type="button">
-              <span>تحديد موعد مكالمة</span>
-            </button>
-          </div>
-          <div class="hero-footnote">
-            إذا وفّرتم <span>بضعة لترات فقط لكل مركبة</span>، يكون النظام قد سدد كلفته بالكامل.
-          </div>
-          <div class="hero-metrics">
-            <div class="hero-metric">
-              <span class="hero-metric-label">التغطية</span>
-              <span class="hero-metric-value">مستودعات · صهاريج متنقلة · آليات</span>
-            </div>
-            <div class="hero-metric">
-              <span class="hero-metric-label">النموذج</span>
-              <span class="hero-metric-value">SaaS + Hardware</span>
-            </div>
-            <div class="hero-metric">
-              <span class="hero-metric-label">القطاعات</span>
-              <span class="hero-metric-value">البناء · النقل · الصناعة</span>
-            </div>
-          </div>
-        </div>
-        <div class="hero-visual" data-animate="fade-right">
-          <div class="hero-grid"></div>
-          <div class="hero-orbit"></div>
-          <div class="hero-dashboard">
-            <div class="dash-row">
-              <div class="dash-card">
-                <div class="dash-label">
-                  <span>رؤية 360° للأسطول</span>
-                  <span class="dash-pill">لحظي</span>
-                </div>
-                <div class="dash-value">+18% ربحية الوقود</div>
-                <div class="dash-meta">
-                  <span>متعدد المواقع | خزانات + صهاريج متنقلة</span>
-                  <span class="dash-trend dash-trend--positive">
-                    <span class="dash-trend-arrow"></span>
-                    <span>‑12% خسائر</span>
-                  </span>
-                </div>
-                <div class="dash-sites">
-                  <div class="dash-site-pill">
-                    <span>ورشة بناء · الجنوب</span>
-                    <span class="dash-site-dot"></span>
-                  </div>
-                  <div class="dash-site-pill">
-                    <span>مستودع نقل · الشمال</span>
-                    <span class="dash-site-dot"></span>
-                  </div>
-                </div>
-              </div>
-              <div class="dash-card">
-                <div class="dash-label">
-                  <span>الصيانة الوقائية</span>
-                  <span class="dash-pill">تنبيهات ميدانية</span>
-                </div>
-                <div class="dash-meta">
-                  <span>أعطال تم تجنبها هذا الشهر</span>
-                  <span class="dash-trend dash-trend--positive">
-                    <span class="dash-trend-arrow"></span>
-                    <span>–7 توقفات</span>
-                  </span>
-                </div>
-                <div class="dash-bar-group">
-                  <div class="dash-bar"></div>
-                  <div class="dash-bar"></div>
-                  <div class="dash-bar"></div>
-                  <div class="dash-bar"></div>
-                </div>
-                <div class="dash-mini-row">
-                  <div class="dash-mini-pill">
-                    <span>تنبيهات حرجة</span>
-                    <span style="color:#ff9ba9;font-weight:600;">2</span>
-                  </div>
-                  <div class="dash-mini-pill">
-                    <span>صيانة يجب جدولتها</span>
-                    <span style="color:#5cffc6;font-weight:600;">9</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="dash-card" style="margin-top:10px;">
-              <div class="dash-label">
-                <span>تتبع الوقود</span>
-                <span class="dash-pill">من المورد إلى المحرك</span>
-              </div>
-              <div class="dash-value" style="font-size:1rem;">لا مناطق عمياء بين المستودع، الصهريج المتنقل والآليات.</div>
-              <div class="dash-meta">
-                <span>بيانات مجمعة حسب الموقع والمركبة</span>
-                <span class="dash-status">
-                  <span class="dash-status-dot"></span>
-                  <span>موثوقية البيانات 99.2%</span>
-                </span>
-              </div>
-              <div class="dash-footer-row">
-                <div class="dash-chip">
-                  <span>ROI</span> من 1 إلى 3 أشهر
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    <section id="contact" class="contact-section">
+      <div class="contact-wrapper">
+        <h2>Contact</h2>
+        <p>
+          Have a project in mind or want to collaborate? Send a message and we'll get back to you.
+        </p>
 
-      <!-- Vision AR -->
-      <section id="ar-vision" class="section">
-        <div class="section-header">
-          <div>
-            <div class="section-kicker">الرؤية والتموقع</div>
-            <h2 class="section-title">رؤية أوضح، خسائر أقل، وتحكم حقيقي.</h2>
-          </div>
-          <p class="section-subtitle">
-            Mazoo تجلب الشفافية والبساطة إلى إدارة الأسطول، حتى تتمكن الشركات المغربية من
-            <strong>التحكم في تكلفتها الحقيقية</strong>، دون تعقيد تقني أو مصطلحات مبالغ فيها.
-          </p>
-        </div>
-        <div class="grid-2">
-          <article class="card" data-animate="fade-left">
-            <div class="card-header">
-              <h3 class="card-title">الرؤية والمهمة</h3>
-              <span class="card-tag">الاتجاه</span>
-            </div>
-            <div class="card-body">
-              <p>
-                <strong>الرؤية:</strong> أن نكون الخيار الأول للشركات المغربية عندما يتعلق الأمر
-                بتأمين وتحسين أساطيلها، عبر حل مجرّب يعالج <strong>مشاكل الميدان الحقيقية</strong>.
-              </p>
-              <p>
-                <strong>المهمة:</strong> رقمنة إدارة الأسطول عبر مقاربة مرنة
-                <strong>(SaaS + Hardware)</strong> توحّد بيانات الوقود والصيانة، لتبسيط اتخاذ القرار
-                ومرافقة العملاء في التغيير.
-              </p>
-            </div>
-          </article>
-
-          <article class="card" data-animate="fade-right">
-            <div class="card-header">
-              <h3 class="card-title">لماذا Mazoo ؟</h3>
-              <span class="card-tag">عرض القيمة</span>
-            </div>
-            <div class="card-body">
-              <p>
-                وعدنا: <strong>حل حوكمة موحد</strong> يعامل الوقود والصيانة كـ
-                <strong>رافعة ربحية</strong>، وليس كتكلفة مفروضة.
-              </p>
-              <ul class="card-list">
-                <li>
-                  <span class="card-bullet"></span>
-                  <span>رؤية موحدة لكل مواقعكم: المقر، المستودعات الجهوية والورش المؤقتة.</span>
-                </li>
-                <li>
-                  <span class="card-bullet"></span>
-                  <span>تتبع كامل للتر الواحد: من المورد، إلى الخزان، إلى الصهريج المتنقل، وصولاً إلى محرك الآلة.</span>
-                </li>
-                <li>
-                  <span class="card-bullet"></span>
-                  <span>واجهة بسيطة، مصممة لفرق الميدان لديكم، وليس لمهندسي تكنولوجيا المعلومات.</span>
-                </li>
-              </ul>
-              <div class="usp-highlight">
-                <strong>ميزة Mazoo:</strong> حل حوكمة موحّد (وقود + صيانة) يحوّل بيانات الميدان إلى
-                <strong>أرباح قابلة للقياس</strong>، عبر واجهة بسيطة مصممة لإيقاف النزيف المالي.
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- Pains AR -->
-      <section id="ar-pain" class="section">
-        <div class="section-header">
-          <div>
-            <div class="section-kicker">لمن هذا الحل؟</div>
-            <h2 class="section-title">مصمم لـ "كريم" مدير العمليات المتعددة.</h2>
-          </div>
-          <p class="section-subtitle">
-            مالك، مدير عام أو مدير تقني/لوجستي في البناء، النقل أو الصناعة. أسطول معقّد، مواقع متباعدة،
-            شاحنات صهريجية… وأيّام مليئة بتقارير Excel غير متطابقة ووعود لم تتحقق.
-          </p>
-        </div>
-        <div class="grid-2-balanced">
-          <article class="card card--alert" data-animate="fade-left">
-            <div class="card-pill">ما الذي يبقيك مستيقظاً؟</div>
-            <h3 class="card-title">تسريبات غير مرئية، وتكلفة حقيقية.</h3>
-            <ul class="card-list">
-              <li>
-                <span class="card-bullet"></span>
-                <span><strong>العمى عن بُعد:</strong> صعوبة معرفة ما يحدث فعلياً في المستودعات والورش البعيدة.</span>
-              </li>
-              <li>
-                <span class="card-bullet"></span>
-                <span><strong>الثقب الأسود للصهريج المتنقل:</strong> لا يمكن التحقق بسهولة من أن ما خرج من الصهريج يساوي ما دخل للآليات.</span>
-              </li>
-              <li>
-                <span class="card-bullet"></span>
-                <span><strong>ضبابية التكاليف:</strong> غياب رؤية موحدة لاستهلاك الوقود وصحة المركبات عبر كل المواقع.</span>
-              </li>
-              <li>
-                <span class="card-bullet"></span>
-                <span><strong>أعطال كان يمكن تجنبها:</strong> آليات متوقفة في مواقع نائية بسبب غياب الصيانة الوقائية.</span>
-              </li>
-            </ul>
-          </article>
-
-          <article class="card card--success" data-animate="fade-right">
-            <div class="card-pill">ماذا تريد فعلاً؟</div>
-            <h3 class="card-title">التحكم في الأسطول وكأنك حاضر في كل موقع.</h3>
-            <ul class="card-list">
-              <li>
-                <span class="card-bullet"></span>
-                <span><strong>رؤية 360°:</strong> الاطلاع على مستوى الخزانات، موقع الصهريج المتنقل، واستهلاك الآليات في شاشة واحدة.</span>
-              </li>
-              <li>
-                <span class="card-bullet"></span>
-                <span><strong>تتبع كامل:</strong> متابعة مسار الوقود من المورد إلى المحرك، بدون أي منطقة عمياء.</span>
-              </li>
-              <li>
-                <span class="card-bullet"></span>
-                <span><strong>تحكم عن بُعد:</strong> إدارة المواقع وكأنك متواجد بها، دون زيارات ميدانية مستمرة.</span>
-              </li>
-              <li>
-                <span class="card-bullet"></span>
-                <span><strong>ثقة في الأرقام:</strong> بيانات لا يمكن الطعن فيها، لمواجهة أي خلل أو شبهة تلاعب.</span>
-              </li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <!-- Values AR -->
-      <section class="section">
-        <div class="section-header">
-          <div>
-            <div class="section-kicker">قيمنا</div>
-            <h2 class="section-title">قيم وُلدت في الميدان، لا في العروض التقديمية.</h2>
-          </div>
-          <p class="section-subtitle">
-            نتحدث لغة البناء والنقل. Mazoo وُلدت من واقع الورشات، سائقي الشاحنات، ومسؤولي الاستغلال، وليس
-            من مكاتب مكيفة.
-          </p>
-        </div>
-        <div class="values-grid">
-          <article class="value-card" data-animate="scale-in">
-            <div class="value-kicker">القيمة #1</div>
-            <h3 class="value-title">البساطة</h3>
-            <p class="value-body">
-              التكنولوجيا يجب أن تخدم الإنسان، لا العكس. نبني حلولاً بديهية
-              <strong>تزيل التعقيد</strong> بدلاً من إضافته.
-            </p>
-          </article>
-          <article class="value-card" data-animate="scale-in">
-            <div class="value-kicker">القيمة #2</div>
-            <h3 class="value-title">النزاهة</h3>
-            <p class="value-body">
-              نبيع الشفافية في الوقود، لذا يجب أن نكون <strong>نموذجاً في الوضوح</strong>. نقول الحقيقة
-              للعميل حتى لو كانت مؤلمة. الثقة هي عملتنا الأساسية.
-            </p>
-          </article>
-          <article class="value-card" data-animate="scale-in">
-            <div class="value-kicker">القيمة #3</div>
-            <h3 class="value-title">هوس الميدان</h3>
-            <p class="value-body">
-              لسنا مطورين حبيسي المكاتب. نفهم الغبار، الشاحنات والسائقين. حلولنا تنطلق من
-              <strong>الواقع العملي</strong> وليس من الافتراضات.
-            </p>
-          </article>
-          <article class="value-card" data-animate="scale-in">
-            <div class="value-kicker">القيمة #4</div>
-            <h3 class="value-title">نجاح العميل</h3>
-            <p class="value-body">
-              لا نسلم مجرد برنامج، بل نرافق <strong>تغييراً كاملاً</strong>. مقياس نجاحنا الوحيد هو
-              <strong>التوفير الذي تحققه</strong> شركتك.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <!-- Offers AR -->
-      <section id="ar-solution" class="section">
-        <div class="section-header">
-          <div>
-            <div class="section-kicker">العرض والنموذج</div>
-            <h2 class="section-title">مستويان بسياسة واحدة: نؤمّن ثم نوسّع.</h2>
-          </div>
-          <p class="section-subtitle">
-            تبدأ من موقع واحد أو أسطول محدود، ثم توسّع تدريجياً حتى يتحول الأسطول إلى
-            <strong>مركز ربح</strong> يُدار بالبيانات، لا بالحدس.
-          </p>
-        </div>
-        <div class="offers-grid">
-          <article class="offer-card" data-animate="fade-left">
-            <div class="offer-badge">الحزمة الأساسية</div>
-            <h3 class="offer-title">خطوة أولى ذكية وبسيطة.</h3>
-            <p class="offer-sub">
-              لموقع واحد أو أسطول صغير. عائد سريع، مع التزام مالي محدود.
-            </p>
-            <ul class="offer-list">
-              <li>
-                <span class="offer-dot"></span>
-                <span>وصول إلى المنصة لتجميع بيانات الوقود والصيانة في مكان واحد.</span>
-              </li>
-              <li>
-                <span class="offer-dot"></span>
-                <span>تركيب وتجهيز موقع واحد أو ورشة تجريبية.</span>
-              </li>
-              <li>
-                <span class="offer-dot"></span>
-                <span>مؤشرات واضحة: خسائر مُتفاداة، انحرافات مكتشفة، أعطال تم تجنبها.</span>
-              </li>
-              <li>
-                <span class="offer-dot"></span>
-                <span>مثالية لاختبار الحل وإقناع الفرق الداخلية.</span>
-              </li>
-            </ul>
-            <div class="offer-footnote">
-              إذا وفّرتم <strong>بضعة لترات فقط لكل شاحنة</strong>، يكون النظام قد غطى كلفته.
-            </div>
-          </article>
-
-          <article class="offer-card offer-card--dark" data-animate="fade-right">
-            <div class="offer-badge">حزمة Multi-Sites المتقدمة</div>
-            <h3 class="offer-title">برج المراقبة المتكامل.</h3>
-            <p class="offer-sub">
-              للشركات ذات النضج الأعلى وعدة مستودعات وورش تشغيلية في مناطق مختلفة.
-            </p>
-            <ul class="offer-list">
-              <li>
-                <span class="offer-dot"></span>
-                <span>إشراف مركزي على كل المواقع الثابتة والمتنقلة.</span>
-              </li>
-              <li>
-                <span class="offer-dot"></span>
-                <span>ربط مع أنظمة ERP وواجهات API، وتطبيق جوال للفرق الميدانية.</span>
-              </li>
-              <li>
-                <span class="offer-dot"></span>
-                <span>دعم مخصص ومرافقة Success تركز على التوفير الفعلي.</span>
-              </li>
-              <li>
-                <span class="offer-dot"></span>
-                <span>نموذج مرن يسمح بربط الأسطول كاملاً تدريجياً دون تعطيل التشغيل.</span>
-              </li>
-            </ul>
-            <div class="offer-footnote">
-              الهدف: <strong>توحيد حوكمة الوقود والصيانة</strong> في كل المواقع، وجعل العودة إلى
-              الوراء غير واردة.
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- Contact AR -->
-      <section id="ar-contact" class="section">
-        <div class="section-header">
-          <div>
-            <div class="section-kicker">الخطوة التالية</div>
-            <h2 class="section-title">20 دقيقة كافية لتغيير طريقة رؤيتكم للأسطول.</h2>
-          </div>
-          <p class="section-subtitle">
-            شاركونا كيف يبدو أسطولكم اليوم. نريكم، في شاشة واحدة، أين تختفي الأموال وكيف تستعيدون
-            التحكم فيها.
-          </p>
-        </div>
-
-        <div class="contact-card" data-animate="fade-up">
-          <div class="contact-info">
-            <p>
-              املؤوا النموذج وسنعود إليكم لـ:
-            </p>
-            <ul class="card-list" style="margin-top:2px;">
-              <li>
-                <span class="card-bullet"></span>
-                <span>تحديد موعد عرض توضيحي مخصص لمنصة Mazoo.</span>
-              </li>
-              <li>
-                <span class="card-bullet"></span>
-                <span>أو تنظيم اجتماع (عن بُعد أو حضورياً) حسب توافركم.</span>
-              </li>
-            </ul>
-
-            <div style="margin-top:10px;">
-              <div class="contact-point">
-                <a href="mailto:contact@mazoo.xyz">contact@mazoo.xyz</a>
-                <span class="contact-point-label">: البريد الإلكتروني</span>
-              </div>
-              <div class="contact-point">
-                <a href="https://www.linkedin.com/in/adnane-saidi-50493520b/" target="_blank" rel="noopener noreferrer">Adnane
-                  Saidi</a>
-                <span class="contact-point-label">: LinkedIn</span>
-              </div>
-            </div>
-
-            <p style="margin-top:10px;font-size:0.8rem;">
-              نتحدث <strong>العربية</strong> و<strong>الفرنسية</strong>، وقبل كل شيء نتحدث لغة الميدان:
-              الورشات، المستودعات، الشاحنات والربحية.
-            </p>
+        <form class="contact-form">
+          <div class="form-row">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" required />
           </div>
 
-          <form class="contact-form" id="contact-form-ar">
-            <div class="form-row">
-              <div class="form-field">
-                <label for="ar-name" class="form-label">الاسم الكامل</label>
-                <input id="ar-name" name="name" type="text" class="form-input" placeholder="مثال: كريم العمراني" required />
-              </div>
-              <div class="form-field">
-                <label for="ar-company" class="form-label">الشركة</label>
-                <input id="ar-company" name="company" type="text" class="form-input" placeholder="اسم شركتكم" />
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-field">
-                <label for="ar-email" class="form-label">البريد المهني</label>
-                <input id="ar-email" name="email" type="email" class="form-input" placeholder="you@company.ma" required />
-              </div>
-              <div class="form-field">
-                <label for="ar-phone" class="form-label">رقم الهاتف</label>
-                <input id="ar-phone" name="phone" type="tel" class="form-input" placeholder="+212 ..." />
-              </div>
-            </div>
-            <div class="form-field">
-              <label for="ar-topic" class="form-label">الموضوع</label>
-              <select id="ar-topic" name="topic" class="form-select">
-                <option value="demo">طلب عرض توضيحي</option>
-                <option value="rdv">تحديد موعد مكالمة</option>
-                <option value="question">استفسار عام</option>
-              </select>
-            </div>
-            <div class="form-field">
-              <label for="ar-message" class="form-label">رسالتكم</label>
-              <textarea id="ar-message" name="message" class="form-textarea" placeholder="بعض السطور حول أسطولكم (القطاع، عدد المواقع، أهم التحديات)..."></textarea>
-            </div>
-            <div class="form-footer">
-              <div class="form-hint">
-                لا سبام ولا إلحاح. فقط نقاش صريح حول الأرقام والتحديات.
-              </div>
-              <div style="display:flex;flex-direction:column;align-items:flex-start;gap:4px;">
-                <button type="submit" class="btn btn-primary">
-                  <span>إرسال الطلب</span>
-                </button>
-                <div id="form-status-ar" class="form-status"></div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </section>
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+          </div>
 
-      <footer class="footer">
-        <div>© <span id="year-ar"></span> Mazoo. جميع الحقوق محفوظة.</div>
-        <div>
-          موقع تعريفي لحل إدارة الوقود والصيانة للأساطيل –&nbsp;
-          <a href="mailto:contact@mazoo.xyz">contact@mazoo.xyz</a>
-        </div>
-      </footer>
+          <div class="form-row">
+            <label for="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              placeholder="Tell us about your project or question..."
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary">Send Message</button>
+        </form>
+      </div>
     </section>
   </main>
-
-  <!-- Bouton flèche remonter en haut -->
-  <button id="scrollTopBtn" class="scroll-top" type="button" aria-label="Revenir en haut">
-    ↑
-  </button>
-
-  <script>
-    // Préférence de mouvement (accessibilité)
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Year in footer
-    (function () {
-      const year = new Date().getFullYear();
-      const yearFr = document.getElementById('year-fr');
-      const yearAr = document.getElementById('year-ar');
-      if (yearFr) yearFr.textContent = year;
-      if (yearAr) yearAr.textContent = year;
-    })();
-
-    // Language switch
-    const langButtons = document.querySelectorAll('.lang-toggle');
-    const frPage = document.getElementById('fr-page');
-    const arPage = document.getElementById('ar-page');
-
-    function setLang(lang, { scroll = true } = {}) {
-      const isArabic = lang === 'ar';
-
-      // Classe sur le body
-      document.body.classList.remove('lang-fr', 'lang-ar');
-      document.body.classList.add(isArabic ? 'lang-ar' : 'lang-fr');
-
-      // Attributs HTML globaux
-      document.documentElement.lang = isArabic ? 'ar' : 'fr';
-      document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
-
-      // Cacher/afficher les sections
-      if (frPage && arPage) {
-        frPage.hidden = isArabic;
-        arPage.hidden = !isArabic;
-      }
-
-      // Boutons UI
-      langButtons.forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.lang === lang);
-      });
-
-      // Sauvegarde du choix
-      try {
-        localStorage.setItem('mazoo-lang', lang);
-      } catch (e) {
-        // stockage désactivé, on ignore
-      }
-
-      // Scroll en haut si demandé
-      if (scroll) {
-        if (prefersReducedMotion) {
-          window.scrollTo(0, 0);
-        } else {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-      }
-    }
-
-    // Initialisation langue au chargement
-    (function initLang() {
-      let savedLang = null;
-      try {
-        savedLang = localStorage.getItem('mazoo-lang');
-      } catch (e) {
-        savedLang = null;
-      }
-      setLang(savedLang === 'ar' ? 'ar' : 'fr', { scroll: false });
-    })();
-
-    langButtons.forEach(btn => {
-      btn.addEventListener('click', () => setLang(btn.dataset.lang));
-    });
-
-    // Navigation scroll handling
-    const navLinks = document.querySelectorAll('.nav-link, .btn[data-section]');
-    const topNav = document.querySelector('.top-nav');
-
-    function getNavOffset() {
-      if (!topNav) return 0;
-      return -(topNav.getBoundingClientRect().height + 8); // petit padding sous le header
-    }
-
-    function scrollToSection(sectionKey) {
-      const isFr = document.body.classList.contains('lang-fr');
-      const prefix = isFr ? 'fr' : 'ar';
-      const targetId = `${prefix}-${sectionKey}`;
-      const el = document.getElementById(targetId);
-      if (!el) return;
-
-      const rect = el.getBoundingClientRect();
-      const yOffset = getNavOffset();
-      const y = rect.top + window.scrollY + yOffset;
-
-      window.scrollTo({
-        top: y,
-        behavior: prefersReducedMotion ? 'auto' : 'smooth'
-      });
-    }
-
-    navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        const section = e.currentTarget.dataset.section;
-        if (!section) return;
-        e.preventDefault();
-        scrollToSection(section);
-      });
-    });
-
-    // Gérer un éventuel hash à l'ouverture (#fr-contact, #ar-contact, etc.)
-    window.addEventListener('load', () => {
-      const hash = window.location.hash.slice(1);
-      if (!hash) return;
-      const el = document.getElementById(hash);
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const yOffset = getNavOffset();
-      const y = rect.top + window.scrollY + yOffset;
-      window.scrollTo(0, y);
-    });
-
-    // Scroll reveal animations
-    const animatedEls = document.querySelectorAll('[data-animate]');
-
-    if (!prefersReducedMotion && 'IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-            obs.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.18 });
-
-      animatedEls.forEach(el => observer.observe(el));
-    } else {
-      // Fallback : tout visible
-      animatedEls.forEach(el => el.classList.add('in-view'));
-    }
-
-    // Fake form handling (frontend only)
-    function handleForm(formId, statusId) {
-      const form = document.getElementById(formId);
-      const status = document.getElementById(statusId);
-      if (!form || !status) return;
-
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        form.classList.add('is-submitted');
-
-        status.textContent = formId === 'contact-form-ar'
-          ? 'شكراً، سنتواصل معكم قريباً.'
-          : 'Merci, nous vous recontacterons rapidement.';
-
-        setTimeout(() => {
-          status.textContent = '';
-          form.classList.remove('is-submitted');
-        }, 6000);
-
-        form.reset();
-      });
-    }
-
-    handleForm('contact-form-fr', 'form-status-fr');
-    handleForm('contact-form-ar', 'form-status-ar');
-
-    // Bouton remonter en haut
-    const scrollBtn = document.getElementById('scrollTopBtn');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 400) {
-        scrollBtn.classList.add('visible');
-      } else {
-        scrollBtn.classList.remove('visible');
-      }
-    });
-
-    scrollBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: prefersReducedMotion ? 'auto' : 'smooth'
-      });
-    });
-  </script>
 </body>
 </html>
